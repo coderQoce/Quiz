@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+        font-family: 'poppins', sans-serif;
+        box-sizing: border-box;
+    }
+    body{
+        background: black;
+    }
+    .QA{
+        background: #fff;
+        width: 90%;
+        max-width: 600px;
+        margin: 100px auto 0;
+        border-radius: 10px;
+        padding: 30px;
+    }
+    .QA h1{
+        font-size: 25px;
+        color: Black;
+        font-weight: 600;
+        border-bottom: 1px solid #333;
+        padding-bottom: 30px;
+    }
+    .quiz{
+        padding: 20px 0;
+    }
+    .quiz h2{
+        font-size: 18px;
+        color: black;
+        font-weight: 600;
+    }
+  
+    .btn{
+        background: #fff;
+        color: #222;
+        font-weight: 500;
+        width: 100%;
+        border: 1px solid #222;
+        padding: 10px;
+        margin: 10px 0;
+        text-align: left;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+    .red{
+        color:red;
+        font-size:32px;
+    }
+    .yellow{
+         color:yellow;
+        font-size:32px
+    }
+    .green{
+        color:green;
+        font-size:32px
+    }
+    .btn:hover{
+        background: black;
+        color: #fff;
+    }
+  #score{
+        color:green;
+        font:30px;
+    }
+
+    #btn2{
+        background: black;
+        color: white;
+        font-weight: 500;
+        width: 150px;
+        border: 0;
+        padding: 10px;
+        margin: 20px auto 0;
+        border-radius: 4px;
+        cursor: pointer;
+        display: none;
+    }
+</style>
+<body>
+    <div class="QA">
+        <h1>Quiz</h1>
+         <h1 id ='score' >Score: </h1>       
+        <div id = 'rate'> <div>
+        <div id= 'quize' class="quiz">
+            <h2 id="question">Questions</h2>
+            <div id="answer-btns">
+            </div>
+            <button id="btn2">Next</button>
+        </div>
+    </div>
+</body>
+
+
+<!-- Javascript Code -->
+
+
+<script src="index.js">
+    
+// Questions
+
+
+Questions=[
+    {
+        question: "Who is the coach that won a treble for barcelona? ",
+        answers: [
+            {text: "Pep Guardiola", correct: true},
+            {text: "Jurgen Klopp", correct: false},
+            {text: "Que que Setien", correct: false},
+            {text: "Luis Enrique", correct: false},
+        ]
+    },
+    {
+        question: "How many Ucl Does Manchester United has?",
+        answers: [
+            {text: "5", correct: false},
+            {text: "10", correct: false},
+            {text: "3", correct: true},
+            {text: "6", correct: false},
+        ]
+    },
+    {
+        question: "What Year did Liverpool win their first ever Premier League Title?",
+        answers: [
+            {text: "2005", correct: false},
+            {text: "1990", correct: false},
+            {text: "1979", correct: false},
+            {text: "2020", correct: true},
+        ]
+    },
+    {
+        question: "When did Lionel Messi's Argentina win the World Cup?",
+        answers: [
+            {text: "2014", correct: false},
+            {text: "2022", correct: true},
+            {text: "2010", correct: false},
+            {text: "2018", correct: false},
+        ]
+    },
+    {
+        question: "What Position Did Chelsea Finish in the Premier League 2022/23 Season ?",
+        answers: [
+            {text: "10th Position", correct: false},
+            {text: "3rd Position", correct: false},
+            {text: "Winners", correct: false},
+            {text: "12th Position", correct: true},
+        ]
+    },
+    {
+        question: "Which Team won the First ever Premier League Title ?",
+        answers: [
+            {text: "Chelsea", correct: false},
+            {text: "Manchester United", correct: true},
+            {text: "Newcatle", correct: false},
+            {text: "Arsenal", correct: false},
+        ]
+    },
+    {
+        question: "Who is the UCL all time Goalscorer?",
+        answers: [
+            {text: "Lionel Messi", correct: false},
+            {text: "Wayne Rooney", correct: false},
+            {text: "Christiano ROnaldo(Suiiiii)", correct: true},
+            {text: "Zlatan Ibrahimovic", correct: false},
+        ]
+    },
+    {
+        question: "The fastets goal Premier League history Came in 7.69seconds.Who scored it?",
+        answers: [
+            {text: "Shane Long", correct: true},
+            {text: "Wayne Rooney", correct: false},
+            {text: "Christiano ROnaldo(Suiiiii)", correct: false},
+            {text: "Zlatan Ibrahimovic", correct: false},
+        ]
+    },
+    {
+        question: "Which Country has the most world cup?",
+        answers: [
+            {text: "France", correct: false},
+            {text: "Germany", correct: false},
+            {text: "England", correct: false},
+            {text: "Brazil", correct: true},
+        ]
+    },
+    {
+        question: "Ronaldo's Portugal won the European Championship in what year?",
+        answers: [
+            {text: "2020", correct: false},
+            {text: "2008", correct: false},
+            {text: "2016", correct: true},
+            {text: "2010", correct: false},
+        ]
+    },
+    {
+        question: "Who is the best famous Commentator in the world of football?",
+        answers: [
+            {text: "Jim Beglin", correct: false},
+            {text: "Peter Drury", correct: true},
+            {text: "Andy Gray ", correct: false},
+            {text: "Martin Tyler", correct: false},
+        ]
+    },
+];
+
+
+           8   
+const questionElement = document.getElementById("question");
+const quiz = document.getElementById("quiz");
+const answerButton = document.getElementById("answer-btns");
+const section = document.getElementById("rate");
+const scoreElement = document.getElementById("score");
+
+let currentQuestionIndex=0;
+let score=0;
+
+function startQuiz() {
+    showQuestion();
+}
+
+//      Question Side Code
+
+function showQuestion() {
+    if(currentQuestionIndex>=Questions.length) {
+        endQuiz();
+        return;
+    }
+
+    const currentQuestion=Questions[currentQuestionIndex];
+
+    questionElement.innerHTML=`${currentQuestionIndex+1}. ${currentQuestion.question
+        }`;
+
+    answerButton.innerHTML=''; // Clear previous answer buttons
+
+    currentQuestion.answers.forEach((answer) => {
+        const button=document.createElement("button");
+        button.innerHTML=answer.text;
+        button.classList.add("btn");
+        button.addEventListener("click", () => handleAnswerClick(answer));
+
+        answerButton.appendChild(button);
+    });
+}
+
+//        Answer Handling Code
+
+function handleAnswerClick(answer) {
+    if(answer.correct) {
+        score++;
+    }
+
+    scoreElement.innerHTML=`Your Score: ${score}/${Questions.length}`;
+
+    animateAndNextQuestion();
+}
+function animateAndNextQuestion() {
+    document.querySelectorAll(".btn").forEach((btn) => {
+        const animation=btn.animate(
+            [{opacity: "1"}, {opacity: "0"}],
+            {duration: 100, easing: "ease-in-out"}
+        );
+
+        animation.onfinish=() => btn.remove();
+    });
+
+    currentQuestionIndex++;
+    setTimeout(showQuestion, 500); // Delay showing the next question
+}
+
+    //       Score Sorting Code
+
+function endQuiz() {
+    quiz?.remove();
+    section.classList.add(
+        score>=Math.round((Questions.length-1)/2)
+            ? "green"
+            :score===Math.round((Questions.length-1)/2)
+                ? "yellow"
+                :"red"
+    );
+
+    section.innerHTML=
+        score>=Math.round((Questions.length-1)/2)
+            ? "Excellent! You Passed"
+            :"You Failed";
+}
+
+startQuiz();
+
+</script>
+</html>
